@@ -90,6 +90,7 @@ public class UserController {
             data.put("identity", identity);
             return new UserResult(code, data, msg);
         }
+        System.out.println("error");
         return new UserResult(Code.ERROR_CODE, data, "用户名或密码或身份错误");
     }
 
