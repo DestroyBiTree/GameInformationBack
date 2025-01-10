@@ -4,12 +4,16 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/internet_competition?useSSL=false
     username: root
     password: root
 
 mybatis-plus:
+  # 配置Mapper XML文件位置，和MyBatis原本的mapper-locations作用一样，让框架知道去哪里找XML文件
+  mapper-locations: classpath:com/promise/mapper/*.xml
+  # 配置类型别名包，便于在XML文件等地方使用简洁的类名表示实体类，同样类似MyBatis的对应配置
+  type-aliases-package: com.promise.entity
   global-config:
     banner: false
     db-config:
@@ -19,5 +23,6 @@ mybatis-plus:
       logic-not-delete-value: 1
       logic-delete-value: 0
   configuration:
+    # 设置日志实现方式，方便查看SQL执行等日志信息，对MyBatis功能进行扩展补充
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+    map-underscore-to-camel-case: true

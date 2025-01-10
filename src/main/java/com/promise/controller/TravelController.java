@@ -2,15 +2,14 @@ package com.promise.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.promise.controller.result.TravelResult;
-import com.promise.pojo.Travel;
-import com.promise.service.QuestionServiceImpl;
-import com.promise.service.TravelServiceImpl;
+import com.promise.result.TravelResult;
+import com.promise.entity.Travel;
+import com.promise.service.Impl.QuestionServiceImpl;
+import com.promise.service.Impl.TravelServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @CrossOrigin

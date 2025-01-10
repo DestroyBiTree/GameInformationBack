@@ -1,6 +1,6 @@
 package com.promise.controller;
 
-import com.promise.controller.result.UserResult;
+import com.promise.result.UserResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
