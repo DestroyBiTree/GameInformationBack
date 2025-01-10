@@ -1,6 +1,5 @@
 package com.promise.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 /**
@@ -18,5 +17,7 @@ public class DiscountInformation {
     private Integer userId;
     // 提问内容
     private String content;
+
+    private Integer price;
 
 }

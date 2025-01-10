@@ -8,5 +8,6 @@ package com.promise.service;
  * @Version 1.0
  */
 public interface DiscountService {
-     String searchDiscount(String userName);
+     String searchAllDiscount(String userName);
+     String getInformationById(Integer userId);
 }
