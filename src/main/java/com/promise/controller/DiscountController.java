@@ -25,8 +25,14 @@ public class DiscountController {
     DiscountService discountService;
     @GetMapping("/searchDiscount/{userName}")
     public BaseResponse searchDiscount(
-            @ApiParam(value = "用户id", required = true) @PathVariable(value = "userName")  String userName){
-        String response = discountService.searchDiscount(userName);
+            @ApiParam(value = "用户名字", required = true) @PathVariable(value = "userName")  String userName){
+        String response = discountService.searchAllDiscount(userName);
+        return BaseResponse.successObject(response);
+    }
+    @GetMapping("/searchDiscountById/{userId}")
+    public BaseResponse getInformationById(
+            @ApiParam(value = "用户id", required = true) @PathVariable(value = "userId")  Integer userId){
+        String response = discountService.getInformationById(userId);
         return BaseResponse.successObject(response);
     }
 

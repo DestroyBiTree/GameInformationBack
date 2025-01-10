@@ -14,7 +14,8 @@
     <name>internet-competition</name>
     <description>internet-competition</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
+        <kie.version>7.70.0.Final</kie.version>
     </properties>
     <dependencies>
         <dependency>
@@ -31,7 +32,7 @@
         <dependency>
             <groupId>org.drools</groupId>
             <artifactId>drools-compiler</artifactId>
-            <version>7.10.0.Final</version>
+            <version>${kie.version}</version> <!-- 使用占位符来保证版本一致性 -->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -48,10 +49,22 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kie</groupId>
+            <artifactId>kie-spring</artifactId>
+            <version>${kie.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>${kie.version}</version>
         </dependency>
 
         <dependency>
@@ -77,10 +90,15 @@
             <artifactId>java-jwt</artifactId>
             <version>3.8.2</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version> <!-- 这里是版本号 -->
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -93,6 +111,7 @@
         </plugins>
 
         <resources>
+            <!-- 仅当确实有必要时才包含src/main/java下的资源 -->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -103,9 +122,16 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**.*</include>
+                    <!-- 明确列出要包含的文件类型 -->
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.yaml</include>
                     <include>**/*.xml</include>
+                    <include>**/*.drl</include>
+                    <!-- 添加其他需要包含的文件类型 -->
                 </includes>
+                <!-- 如果不需要对资源文件进行过滤，可以移除或设置为false -->
+                <filtering>false</filtering>
             </resource>
         </resources>
     </build>
