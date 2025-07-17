@@ -14,7 +14,7 @@ public class Question {
     private String content;
     // 是否已经回复 0表示未回复 1表示回复
     private Integer answered;
-    // travel回复
+    // game回复
     @TableField(exist = false)
-    private Travel answer;
+    private Game answer;
 }
