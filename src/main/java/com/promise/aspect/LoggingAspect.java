@@ -23,12 +23,12 @@ public class LoggingAspect {
     // Pointcut定义：匹配com.promise.service.Impl包下所有类的所有方法
 //    @Before("execution(* com.promise.service.Impl..*(..))")
 //    public void logBefore() {
-//        System.out.println("Method is about to be called.");
+//        // 移除了测试打印信息
 //    }
 //
 //    @After("execution(* com.promise.service.Impl..*(..))")
 //    public void logAfter() {
-//        System.out.println("Method has been called.");
+//        // 移除了测试打印信息
 //    }
     @Pointcut("@annotation(com.promise.annotation.CustomLogging)")
     public void logging() {
@@ -38,30 +38,17 @@ public class LoggingAspect {
     public void beforeCalled(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        System.out.println("---------  " + method + "  ------------will be call.");
+        // 移除了测试打印信息
 
         // 获取注解
         CustomLogging annotation = method.getAnnotation(CustomLogging.class);
         if (annotation != null) {
-            System.out.println(annotation.customValue());
-
+            // 移除了测试打印信息
         }
 
     }
 
-    @Before("logging()")
-    public void afterCalled(JoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        Method method = signature.getMethod();
-        System.out.println("---------  " + method + "  ------------has been called.");
-
-        // 获取注解
-        CustomLogging annotation = method.getAnnotation(CustomLogging.class);
-        if (annotation != null) {
-            System.out.println(annotation.customValue());
-
-        }
-
+    public void logAfter() {
     }
 
 }

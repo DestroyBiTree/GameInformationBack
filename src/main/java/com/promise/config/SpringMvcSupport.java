@@ -1,6 +1,6 @@
 package com.promise.config;
 
-import com.promise.controller.interceptor.ProjectInterceptor;
+import com.promise.interceptor.ProjectInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
