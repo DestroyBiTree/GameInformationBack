@@ -1,9 +1,7 @@
 package com.promise.controller;
 
-import com.promise.result.BaseResponse;
-import com.promise.result.QuestionResult;
+import com.promise.response.BaseResponse;
 import com.promise.service.DiscountService;
-import com.promise.util.ResponseCode;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

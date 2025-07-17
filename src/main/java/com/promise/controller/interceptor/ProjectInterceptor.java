@@ -2,7 +2,7 @@ package com.promise.controller.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.promise.controller.Code;
-import com.promise.result.UserResult;
+import com.promise.response.UserResult;
 import com.promise.util.TokenUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
