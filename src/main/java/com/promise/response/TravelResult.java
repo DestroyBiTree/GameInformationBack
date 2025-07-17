@@ -1,11 +1,11 @@
-package com.promise.result;
+package com.promise.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserResult {
+public class TravelResult {
     private Integer code;
     private Object data;
     private String msg;

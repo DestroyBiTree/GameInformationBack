@@ -3,7 +3,7 @@ package com.promise.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.promise.result.QuestionResult;
+import com.promise.response.QuestionResult;
 import com.promise.entity.Question;
 import com.promise.entity.Travel;
 import com.promise.service.Impl.QuestionServiceImpl;

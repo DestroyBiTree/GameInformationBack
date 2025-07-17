@@ -2,7 +2,7 @@ package com.promise.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.promise.result.TravelResult;
+import com.promise.response.TravelResult;
 import com.promise.entity.Travel;
 import com.promise.service.Impl.QuestionServiceImpl;
 import com.promise.service.Impl.TravelServiceImpl;

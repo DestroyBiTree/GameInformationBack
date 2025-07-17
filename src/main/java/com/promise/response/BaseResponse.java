@@ -1,4 +1,4 @@
-package com.promise.result;
+package com.promise.response;
 
 import com.promise.util.ResponseCode;
 import lombok.Data;

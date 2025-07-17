@@ -3,7 +3,7 @@ package com.promise.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.promise.result.UserResult;
+import com.promise.response.UserResult;
 import com.promise.entity.User;
 import com.promise.service.Impl.UserServiceImpl;
 import com.promise.util.CodeUtil;
@@ -12,7 +12,7 @@ import com.promise.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -103,14 +103,17 @@ public class UserController {
     @ResponseBody
     public UserResult save(HttpServletRequest request, @RequestBody User user) {
         // 验证码错误
-        if (!request.getServletContext().getAttribute("code").equals(user.getCode().toUpperCase()))
+        if (!request.getServletContext().getAttribute("code").equals(user.getCode().toUpperCase())) {
             return new UserResult(Code.ERROR_CODE, false, "验证码错误");
+        }
         // 判断用户名是否重复
         List<User> list = userService.getByUsername(user.getUsername());
         boolean flag = list.size() == 0;
         Integer code = flag ? Code.SUCCESS_CODE : Code.ERROR_CODE;
         String msg = flag ? "注册成功" : "用户名重复";
-        if (!flag) return new UserResult(code, false, msg);
+        if (!flag) {
+            return new UserResult(code, false, msg);
+        }
 
         flag = userService.save(user);
         code = flag ? Code.SUCCESS_CODE : Code.ERROR_CODE;
@@ -146,10 +149,11 @@ public class UserController {
         String msg = deletedUsers != null ? "查询成功" : "查询失败";
         return new UserResult(code, deletedUsers, msg);
     }
+
     /**
      * 根据id更新用户信息
      *
-     * @param id 用户的id
+     * @param id   用户的id
      * @param user 用户信息
      * @return UserResult
      */
@@ -162,6 +166,7 @@ public class UserController {
         String msg = flag ? "更新成功" : "更新失败";
         return new UserResult(code, flag, msg);
     }
+
     /**
      * 获取验证码
      *
