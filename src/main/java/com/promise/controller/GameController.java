@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.promise.dto.BaseResponse;
 import com.promise.entity.Game;
-import com.promise.service.QuestionService;
 import com.promise.service.GameService;
 import com.promise.util.ResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,6 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    @Autowired
-    private QuestionService questionService;
-
     /**
      * 分页查询游戏信息
      *
@@ -32,8 +28,8 @@ public class GameController {
      */
     @GetMapping("/{currentPage}/{pageSize}")
     @ResponseBody
-    public BaseResponse getUserByPage(@PathVariable Integer currentPage,
-                                    @PathVariable Integer pageSize) {
+    public BaseResponse getGamesByPage(@PathVariable Integer currentPage,
+                                     @PathVariable Integer pageSize) {
         IPage<Game> iPage = new Page<>(currentPage, pageSize);
         IPage<Game> page = gameService.page(iPage, null);
         

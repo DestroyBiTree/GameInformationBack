@@ -1,6 +1,5 @@
 package com.promise.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 @Data
@@ -17,7 +16,4 @@ public class Game {
     private String genre;
     // 评分 (1-10)
     private Double rating;
-    // 回复的问题的id 无则为null
-    @TableField(value = "questionID")
-    private Integer questionID;
 }
