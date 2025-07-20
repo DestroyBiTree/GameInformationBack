@@ -14,6 +14,6 @@ public class SpringMvcSupport extends WebMvcConfigurationSupport {
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor).excludePathPatterns("/users/login", "/users/register",
-                "/users/code");
+                "/users/code", "/outer");
     }
 }
