@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.promise.mapper.WeatherDao">
+
+    <!-- 根据ids获取天气配置信息，当ids为空时查询所有记录 -->
+    <select id="getWeatherConfig" resultType="com.promise.entity.WeatherConfig">
+        SELECT id, board_id, local_code, sending_frequency, api_key
+        FROM tb_weather_config
+        <if test="ids != null and ids.size() > 0">
+            WHERE id IN
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+    <!-- 更新天气配置信息 -->
+    <update id="updateWeatherConfig">
+        UPDATE tb_weather_config
+        SET local_code       = #{localCode},
+            sending_frequency = #{sendingFrequency},
+            api_key          = #{apiKey},
+            updated      = NOW()
+        WHERE id = #{id}
+    </update>
+
+</mapper>
