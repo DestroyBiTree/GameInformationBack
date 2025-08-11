@@ -2,6 +2,7 @@ package com.promise.service.Impl;
 
 import com.promise.dto.BaseResponse;
 import com.promise.entity.WeatherInfo;
+import com.promise.enums.WeatherCategory;
 import com.promise.service.FontService;
 import com.promise.service.WeatherService;
 import com.promise.util.HttpClientUtil;
@@ -28,36 +29,56 @@ public class WeatherServiceImpl implements WeatherService {
 //        Map<String, Object> stringObjectMap = HttpClientUtil
 //                .sendGetRequest("https://restapi.amap.com/v3/weather/weatherInfo", params);
 
-        WeatherInfo newWeatherInfo = WeatherUtil.extractWeatherInfo(buildFakeWeatherDataMap());
-        if (newWeatherInfo != null) {
+        WeatherInfo weatherInfo = WeatherUtil.extractWeatherInfo(buildFakeWeatherDataMap());
+        if (weatherInfo != null) {
             synchronized (weatherQueue) {
                 if (!weatherQueue.isEmpty()) {
                     weatherQueue.poll();
                 }
-                weatherQueue.offer(newWeatherInfo);
+                weatherQueue.offer(weatherInfo);
             }
-            System.out.println(buildResponseString(newWeatherInfo));
-            return fontService.getFontData(buildResponseString(newWeatherInfo));
+            return buildResponseString(weatherInfo);
         } else {
             WeatherInfo currentWeather = weatherQueue.peek();
             if (currentWeather != null) {
-                return fontService.getFontData(buildResponseString(currentWeather));
+                return buildResponseString(currentWeather);
             } else {
                 return null;
             }
         }
     }
 
-    public static String buildResponseString(WeatherInfo resWeatherInfo){
-        StringBuilder res = new StringBuilder();
-        res.append(resWeatherInfo.getCity());
-        res.append(resWeatherInfo.getWeather());
-        res.append(resWeatherInfo.getWindDirection());
-        res.append(resWeatherInfo.getWindDirection());
-        res.append(resWeatherInfo.getWindDirection());
-        String result = res.toString();
-        return result;
+    public byte[] buildResponseString(WeatherInfo resWeatherInfo) throws Exception {
+        // 天气码
+        int categoryCode = WeatherCategory.getCategoryCode(resWeatherInfo.getWeather());
+        String categoryName = WeatherCategory.getCategoryName(resWeatherInfo.getWeather());
+        byte[] fontData = fontService.getFontData(categoryName);
+        int tem = Integer.parseInt(resWeatherInfo.getTemperature());
 
+        // 验证数据有效性
+        if (categoryCode < 0 || categoryCode > 9) {
+            throw new IllegalArgumentException("categoryCode must be between 0 and 9");
+        }
+        if (fontData == null || fontData.length != 64) {
+            throw new IllegalArgumentException("fontData must be 64 bytes long");
+        }
+        if (tem < -20 || tem > 50) {
+            throw new IllegalArgumentException("tem must be between -20 and 50");
+        }
+
+        // 创建固定大小的字节数组 (1 + 64 + 1 = 66)
+        byte[] result = new byte[66];
+
+        // 放入categoryCode (1字节)
+        result[0] = (byte) categoryCode;
+
+        // 放入fontData (64字节)
+        System.arraycopy(fontData, 0, result, 1, 64);
+
+        // 放入tem (1字节)
+        result[65] = (byte) tem;
+
+        return result;
     }
 
     public static Map<String, Object> buildFakeWeatherDataMap() {
@@ -66,8 +87,8 @@ public class WeatherServiceImpl implements WeatherService {
         liveWeather.put("province", "陕西");
         liveWeather.put("city", "未央");
         liveWeather.put("adcode", "610112");
-        liveWeather.put("weather", "晴天");
-        liveWeather.put("temperature", "33");
+        liveWeather.put("weather", "多云");
+        liveWeather.put("temperature", "29");
         liveWeather.put("winddirection", "西南");
         liveWeather.put("windpower", "≤3");
         liveWeather.put("humidity", "41");
