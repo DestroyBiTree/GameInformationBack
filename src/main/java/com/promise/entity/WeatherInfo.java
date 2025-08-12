@@ -16,4 +16,5 @@ public class WeatherInfo {
     private String humidity;         // 湿度（字符串，如：38）
     private String humidityFloat;    // 湿度（浮点型字符串，如：38.0）
     private String reportTime;
+    private String sendingFrequency;
 }

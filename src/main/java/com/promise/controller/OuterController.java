@@ -20,8 +20,8 @@ public class OuterController {
 
 
     @GetMapping("/getWeather")
-    public byte[] getWeather(@RequestParam String key) throws Exception {
-        return weatherService.getWeather(key);
+    public byte[] getWeather(@RequestParam String boardId) throws Exception {
+        return weatherService.getWeather(boardId);
     }
 
     @GetMapping("/font-data")

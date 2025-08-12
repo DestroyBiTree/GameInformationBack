@@ -41,6 +41,7 @@ public class WeatherUtil {
             weatherInfo.setWindPower((String) weatherData.get("windpower"));     // 风力
             weatherInfo.setHumidity((String) weatherData.get("humidity"));       // 湿度
             weatherInfo.setReportTime((String) weatherData.get("reporttime"));   // 数据更新时间
+            weatherInfo.setSendingFrequency((String) weatherData.get("sendingFrequency"));   // 发送频率
             weatherInfo.setTemperatureFloat((String) weatherData.get("temperature_float")); // 温度（浮点型）
             weatherInfo.setHumidityFloat((String) weatherData.get("humidity_float"));     // 湿度（浮点型）
 
