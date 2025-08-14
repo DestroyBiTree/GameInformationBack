@@ -33,12 +33,12 @@ public class WeatherServiceImpl implements WeatherService {
         params.put("key", weatherConfig.getApiKey());
         params.put("city", weatherConfig.getLocalCode());
         params.put("extensions", "base");
-//        Map<String, Object> weatherInforMap = HttpClientUtil
-//                .sendGetRequest("https://restapi.amap.com/v3/weather/weatherInfo", params);
-//        weatherInforMap.put("sendingFrequency",Integer.toString(weatherConfig.getSendingFrequency()));
+        Map<String, Object> weatherInforMap = HttpClientUtil
+                .sendGetRequest("https://restapi.amap.com/v3/weather/weatherInfo", params);
+        weatherInforMap.put("sendingFrequency",Integer.toString(weatherConfig.getSendingFrequency()));
 
-        WeatherInfo weatherInfo = WeatherUtil.extractWeatherInfo(buildFakeWeatherDataMap(weatherConfig));
-//        WeatherInfo weatherInfo = WeatherUtil.extractWeatherInfo(weatherInforMap);
+//        WeatherInfo weatherInfo = WeatherUtil.extractWeatherInfo(buildFakeWeatherDataMap(weatherConfig));
+        WeatherInfo weatherInfo = WeatherUtil.extractWeatherInfo(weatherInforMap);
         if (weatherInfo != null) {
             synchronized (weatherQueue) {
                 if (!weatherQueue.isEmpty()) {
@@ -107,7 +107,7 @@ public class WeatherServiceImpl implements WeatherService {
         liveWeather.put("reporttime", "2025-07-31 00:38:10");
         liveWeather.put("temperature_float", "33.0");
         liveWeather.put("humidity_float", "41.0");
-        liveWeather.put("sendingFrequency",Integer.toString(weatherConfig.getSendingFrequency()));
+
 
         // 2. 将实时天气数据放入lives列表
         List<Map<String, Object>> livesList = new ArrayList<>();
@@ -120,7 +120,7 @@ public class WeatherServiceImpl implements WeatherService {
         resultMap.put("info", "OK");
         resultMap.put("infocode", "10000");
         resultMap.put("lives", livesList);
-
+        resultMap.put("sendingFrequency",Integer.toString(weatherConfig.getSendingFrequency()));
         return resultMap;
     }
 }
