@@ -8,10 +8,11 @@ public enum WeatherCategory {
     晴朗("晴朗", 0),
     多云("多云", 1),
     有风("有风", 2),
-    雾霾("雾霾", 3),
+    霾天("霾天", 3),
     降雨("降雨", 4),
     降雪("降雪", 5),
-    特殊("特殊", 6);
+    雾天("雾天", 6),
+    特殊("特殊", 7);
 
     private final String categoryName;
     private final int categoryCode;
@@ -44,10 +45,10 @@ public enum WeatherCategory {
         weatherMap.put("热带风暴", 有风);
 
         // 雾霾天气
-        weatherMap.put("霾", 雾霾);
-        weatherMap.put("中度霾", 雾霾);
-        weatherMap.put("重度霾", 雾霾);
-        weatherMap.put("严重霾", 雾霾);
+        weatherMap.put("霾", 霾天);
+        weatherMap.put("中度霾", 霾天);
+        weatherMap.put("重度霾", 霾天);
+        weatherMap.put("严重霾", 霾天);
 
         // 降雨天气
         weatherMap.put("阵雨", 降雨);
@@ -85,18 +86,23 @@ public enum WeatherCategory {
         weatherMap.put("中雪-大雪", 降雪);
         weatherMap.put("大雪-暴雪", 降雪);
 
+        //浓雾
+        weatherMap.put("雾", 雾天);
+        weatherMap.put("浓雾", 雾天);
+        weatherMap.put("强浓雾", 雾天);
+        weatherMap.put("轻雾", 雾天);
+        weatherMap.put("大雾", 雾天);
+        weatherMap.put("特强浓雾", 雾天);
+
+
+
         // 特殊天气
         weatherMap.put("浮尘", 特殊);
         weatherMap.put("扬沙", 特殊);
         weatherMap.put("沙尘暴", 特殊);
         weatherMap.put("强沙尘暴", 特殊);
         weatherMap.put("龙卷风", 特殊);
-        weatherMap.put("雾", 特殊);
-        weatherMap.put("浓雾", 特殊);
-        weatherMap.put("强浓雾", 特殊);
-        weatherMap.put("轻雾", 特殊);
-        weatherMap.put("大雾", 特殊);
-        weatherMap.put("特强浓雾", 特殊);
+
 
         weatherMap.put("热", 特殊);
         weatherMap.put("冷", 特殊);

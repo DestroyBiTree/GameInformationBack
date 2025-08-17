@@ -36,9 +36,9 @@ public class WeatherServiceImpl implements WeatherService {
         Map<String, Object> weatherInforMap = HttpClientUtil
                 .sendGetRequest("https://restapi.amap.com/v3/weather/weatherInfo", params);
         weatherInforMap.put("sendingFrequency",Integer.toString(weatherConfig.getSendingFrequency()));
+        WeatherInfo weatherInfo = WeatherUtil.extractWeatherInfo(weatherInforMap);
 
 //        WeatherInfo weatherInfo = WeatherUtil.extractWeatherInfo(buildFakeWeatherDataMap(weatherConfig));
-        WeatherInfo weatherInfo = WeatherUtil.extractWeatherInfo(weatherInforMap);
         if (weatherInfo != null) {
             synchronized (weatherQueue) {
                 if (!weatherQueue.isEmpty()) {
@@ -99,7 +99,7 @@ public class WeatherServiceImpl implements WeatherService {
         liveWeather.put("province", "陕西");
         liveWeather.put("city", "未央");
         liveWeather.put("adcode", "610112");
-        liveWeather.put("weather", "晴");
+        liveWeather.put("weather", "浓雾");
         liveWeather.put("temperature", "30");
         liveWeather.put("winddirection", "西南");
         liveWeather.put("windpower", "≤3");
